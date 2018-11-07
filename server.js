@@ -9,9 +9,9 @@ const express = require('express'),
     // invoke express and store the result in the variable app
     app = express();
 
-console.log(`entering the app.use section`);
-
 app.use(parser.urlencoded({ extended: true }));
+app.use(express.static( __dirname + '/public/dist/public' ));
+// app.use(express.static(path.join(__dirname, '/public/dist/public')));
 app.use(parser.json());
 
 //connect to DB
