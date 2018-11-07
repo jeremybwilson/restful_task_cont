@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { HttpService } from "./http.service";
 
 @Component({
@@ -12,7 +11,6 @@ export class AppComponent implements OnInit {
     title = 'Restful Tasks API';
     tasks = [];
     constructor (private _httpService : HttpService ) {
-    
     };
 
     ngOnInit () {
@@ -23,6 +21,7 @@ export class AppComponent implements OnInit {
         let observable = this._httpService.getTasks();
         observable.subscribe ( data => {
         console.log("Got our Tasks!", data);
+        // console.log(`Got our tasks! ${data}`);
         this.tasks = data["data"];
         });
     };
