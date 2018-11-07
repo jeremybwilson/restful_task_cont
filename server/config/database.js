@@ -1,8 +1,8 @@
-const mongoose = require('mongoose'),
-        fs = require('fs'),
-        path = require('path'),
-        reg = new RegExp('\\.js$', 'i');
-        
+const mongoose = require('mongoose');
+const path = require('path');
+// const fs = require('fs');
+// const reg = new RegExp('\\.js$', 'i');
+
 //path to models
 // const models_path = path.resolve('server/models');
 

@@ -1,5 +1,7 @@
 const express = require('express'),
-    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    flash = require('express-flash'),
+    parser = require('body-parser'),
     mongoose = require('mongoose'),
     path = require('path'),
 
@@ -17,11 +19,12 @@ app.use(session({
     cookie: {secure: false, maxAge: 60000}
 }));
 
+//connect to DB
 require('./server/config/database');
 
 //schema
 const { Schema } = mongoose;
-const TaskSchema = new Schema ({
+const TaskSchema = new Schema({
     title: {
         type: String,
         required: [true, "Please give your task a title"],
@@ -45,6 +48,7 @@ const Task = mongoose.model('Task', TaskSchema);
 app.get('/', (request, response) => {
     response.redirect('/tasks');
 });
+
 app.get('/tasks', (request, response) => {
     Task.find({})
         .then(tasks_db => {
@@ -53,6 +57,7 @@ app.get('/tasks', (request, response) => {
         })
         .catch(console.log)
 });
+
 app.post('/tasks', (request, response) => {
     //new task is created
     console.log(request.body);
@@ -61,6 +66,7 @@ app.post('/tasks', (request, response) => {
         .then(response.redirect('/'))
         .catch(console.log)
 });
+
 app.get('/tasks/:_id', (request, response) => {
     //a task is found by id
     console.log(request.params._id);
@@ -71,6 +77,7 @@ app.get('/tasks/:_id', (request, response) => {
         })
         .catch(console.log)
 });
+
 app.put('/tasks/:_id', (request, response) => {
     //a task is updated
     console.log(request.params._id, request.body);
@@ -78,6 +85,7 @@ app.put('/tasks/:_id', (request, response) => {
         .then(response.redirect('/'))
         .catch(console.log)
 }); 
+
 app.delete('/tasks/:_id', (request, response) => {
     //a task is deleted 
     console.log(request.params._id, request.body)
