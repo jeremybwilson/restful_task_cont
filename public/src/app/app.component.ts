@@ -20,9 +20,9 @@ export class AppComponent implements OnInit {
     getTasksFromService () {
         let observable = this._httpService.getTasks();
         observable.subscribe ( data => {
-        console.log("Got our Tasks!", data);
-        // console.log(`Got our tasks! ${data}`);
-        this.tasks = data["data"];
+            console.log("Got our Tasks!", data);
+            // console.log(`Got our tasks! ${data}`);
+            this.tasks = data["data"];
         });
     };
 }
