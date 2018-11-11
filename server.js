@@ -15,7 +15,11 @@ app.use(express.static(path.join(__dirname, '/public/dist/public')));
 
 app.use(parser.urlencoded({ extended: true }));
 app.use(parser.json());
-app.use(flash());
+
+app.use( function(request, response, next){
+    console.log(`requesting url: ${request.url}`);
+    next();
+})
 app.use(session({
     secret:'superSekretKitteh',
     resave: false,
@@ -28,7 +32,8 @@ app.use(session({
 
 //connect to DB
 require('./server/config/database');
-require('./server/config/routes')(app);
+// require('./server/config/routes')(app);
+app.use(require('./server/config/routes')); 
 
 // port
 app.listen(port, () => console.log(`Express server listening on port ${port} for Restful Task API`));    // ES6 way
